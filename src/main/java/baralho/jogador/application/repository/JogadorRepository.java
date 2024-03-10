@@ -8,5 +8,5 @@ import java.util.List;
 public interface JogadorRepository {
     Jogador salva(Jogador jogador);
 
-    List<Jogador> listaJogadores (List<Long> jogadres);
+    List<Jogador> buscaJogadores(List<Long> idJogadores);
 }

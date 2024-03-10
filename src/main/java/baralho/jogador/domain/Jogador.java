@@ -15,16 +15,12 @@ import java.util.List;
 public class Jogador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(columnDefinition = "bigint", updatable = false, unique = true, nullable = false)
     private Long id;
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "carta_id")
-    private List<Carta> mao = new ArrayList<>();
 
     public Jogador(JogadorRequest jogadorRequest) {
         this.nome = jogadorRequest.getNome();
     }
-    public void atribuirCartas(List<Carta> cartasDoJogador) {
-        this.mao = cartasDoJogador;
-    }
+
 }

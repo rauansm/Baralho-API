@@ -21,9 +21,9 @@ public class JogadorInfraRepository implements JogadorRepository {
         return jogador;
     }
     @Override
-    public List<Jogador> listaJogadores(List<Long> jogadres) {
+    public List<Jogador> buscaJogadores(List<Long> idJogadores) {
         log.info("[inicia] JogadorInfraRepository - listaJogadores");
-        List<Jogador> jogadores = jogadorSpringDataJPA.findAllById(jogadres);
+        List<Jogador> jogadores = jogadorSpringDataJPA.findAllById(idJogadores);
         log.info("[finaliza] JogadorInfraRepository - listaJogadores");
         return jogadores;
     }
