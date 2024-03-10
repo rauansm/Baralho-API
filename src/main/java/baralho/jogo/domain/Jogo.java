@@ -1,5 +1,6 @@
 package baralho.jogo.domain;
 
+import baralho.handler.APIException;
 import baralho.jogador.domain.Jogador;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -27,7 +29,20 @@ public class Jogo {
 
     public static void validaQuantidadeJogadores(List<Jogador> jogadores) {
         if (jogadores.size() != 4) {
-            throw new RuntimeException("O jogo requer exatamente 4 jogadores.");
+            throw APIException.negocio("O jogo requer exatamente 4 jogadores.");
         }
+    }
+
+    public List<Mao> obtemGanhadorJogo() {
+       int maiorPontuacao = maos.stream()
+               .mapToInt(Mao::calcularPontuacao)
+               .max()
+               .orElse(0);
+
+        return maos.stream()
+                .filter(mao -> mao.calcularPontuacao() == maiorPontuacao)
+                .collect(Collectors.toList());
+
+
     }
 }

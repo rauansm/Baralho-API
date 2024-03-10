@@ -1,6 +1,7 @@
 package baralho.jogador.domain;
 
 import baralho.carta.application.service.CartaResponse;
+import baralho.jogo.domain.Mao;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

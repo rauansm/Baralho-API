@@ -5,4 +5,6 @@ import baralho.jogo.domain.Jogo;
 
 public interface JogoRepository {
     Jogo salva(Jogo jogo);
+
+    Jogo buscaJogoPorId(Long idJogo);
 }

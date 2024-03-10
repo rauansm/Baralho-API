@@ -46,4 +46,8 @@ public class Mao {
         }
         return maos;
     }
+
+    public int calcularPontuacao() {
+    return cartas.stream().mapToInt(Carta::getPonto).sum();
+    }
 }

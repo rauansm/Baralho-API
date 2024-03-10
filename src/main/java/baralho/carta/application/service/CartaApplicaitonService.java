@@ -1,6 +1,7 @@
 package baralho.carta.application.service;
 
 import baralho.carta.infra.CartaClienteFeign;
+import baralho.handler.APIException;
 import baralho.jogador.domain.Carta;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,7 +25,7 @@ public class CartaApplicaitonService implements CartaService {
 
     private void validaQuantidadeCartas(List<Carta> cartas, Integer quantidadeCartas) {
         if (cartas.size() != quantidadeCartas) {
-            throw new RuntimeException("Deck não possui cartas sucifientes.");
+            throw APIException.negocio("Deck não possui cartas sucifientes.");
         }
     }
 }

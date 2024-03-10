@@ -1,9 +1,12 @@
-package baralho.jogo.application.api;
+package baralho.jogo.application.service;
 
 import baralho.carta.application.service.CartaService;
 import baralho.jogador.application.repository.JogadorRepository;
 import baralho.jogador.domain.Carta;
 import baralho.jogador.domain.Jogador;
+import baralho.jogo.application.api.JogoRequest;
+import baralho.jogo.application.api.JogoResponse;
+import baralho.jogo.application.api.ResultadoJogo;
 import baralho.jogo.application.repository.JogoRepository;
 import baralho.jogo.domain.Jogo;
 import baralho.jogo.domain.Mao;
@@ -35,5 +38,15 @@ public class JogoApplicationService implements JogoService {
         Jogo jogo = jogoRepository.salva(new Jogo(maos));
         log.info("[finaliza] JogoApplicationService - iniciaJogo");
         return new JogoResponse(jogo);
+    }
+
+    @Override
+    public ResultadoJogo obtemResultado(Long idJogo) {
+        log.info("[inicia] JogoApplicationService - obtemResultado");
+        Jogo jogo = jogoRepository.buscaJogoPorId(idJogo);
+        jogo.obtemGanhadorJogo();
+        jogoRepository.salva(jogo);
+        log.info("[finaliza] JogoApplicationService - obtemResultado");
+        return new ResultadoJogo(jogo);
     }
 }

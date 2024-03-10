@@ -1,7 +1,7 @@
 package baralho.jogo.application.api;
 
+import baralho.jogo.application.service.JogoService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,5 +16,13 @@ public class JogoController implements JogoAPI {
         JogoResponse partidaIniciada = jogoService.iniciaJogo(novoJogo);
         log.info("[finaliza] JogoController - iniciaJogo");
         return partidaIniciada;
+    }
+
+    @Override
+    public ResultadoJogo obtemResultado(Long idJogo) {
+        log.info("[inicia] JogoController - obtemResultado");
+        ResultadoJogo resultadoJogo = jogoService.obtemResultado(idJogo);
+        log.info("[finaliza] JogoController - obtemResultado");
+        return resultadoJogo;
     }
 }
