@@ -9,8 +9,6 @@ import baralho.jogo.application.api.JogoResponse;
 import baralho.jogo.application.api.ResultadoJogo;
 import baralho.jogo.application.repository.JogoRepository;
 import baralho.jogo.domain.Jogo;
-import baralho.jogo.domain.Mao;
-import baralho.mao.application.service.MaoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -25,7 +23,6 @@ public class JogoApplicationService implements JogoService {
     private final JogadorRepository jogadorRepository;
     private final CartaService cartaService;
     private final JogoRepository jogoRepository;
-    private final MaoService maoService;
 
     @Transactional
     @Override
@@ -33,9 +30,8 @@ public class JogoApplicationService implements JogoService {
         log.info("[inicia] JogoApplicationService - iniciaJogo");
         List<Jogador> jogadores = jogadorRepository.buscaJogadores(novoJogo.getIdsJogadores());
         List<Carta> cartas = cartaService.buscaCartas(novoJogo.getIdDeck(), 20);
-        Jogo.validaQuantidadeJogadores(jogadores);
-        List<Mao> maos = maoService.adicionaMaos(jogadores, cartas);
-        Jogo jogo = jogoRepository.salva(new Jogo(maos));
+        Jogo jogo = Jogo.iniciaJogo(jogadores,cartas);
+        jogoRepository.salva(jogo);
         log.info("[finaliza] JogoApplicationService - iniciaJogo");
         return new JogoResponse(jogo);
     }
