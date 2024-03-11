@@ -55,15 +55,24 @@ public class Jogo {
 
 
     public List<Mao> obtemGanhadorJogo() {
-       int maiorPontuacao = maos.stream()
-               .mapToInt(Mao::calcularPontuacao)
-               .max()
-               .orElse(0);
+       int maiorPontuacao = calculaMaiorPontuacao();
+       List<Mao> vencedores = obtemVencedores(maiorPontuacao);
+        return vencedores;
 
+
+    }
+
+    private List<Mao> obtemVencedores(int maiorPontuacao) {
         return maos.stream()
                 .filter(mao -> mao.calcularPontuacao() == maiorPontuacao)
                 .collect(Collectors.toList());
+    }
 
+    private int calculaMaiorPontuacao() {
+    return maos.stream()
+                .mapToInt(Mao::calcularPontuacao)
+                .max()
+                .orElse(0);
 
     }
 }
