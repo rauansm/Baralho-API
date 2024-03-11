@@ -20,7 +20,7 @@ public class Jogo {
     @Column(columnDefinition = "bigint", updatable = false, unique = true, nullable = false)
     private Long idJogo;
     @OneToMany
-    @JoinColumn(name = "jogador_id")
+    @JoinColumn(name = "jogo_id", referencedColumnName = "idJogo")
     private List<Mao> maos = new ArrayList<>();
 
     public Jogo(List<Mao> maos) {

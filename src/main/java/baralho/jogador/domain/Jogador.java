@@ -2,13 +2,13 @@ package baralho.jogador.domain;
 
 import baralho.jogador.application.JogadorRequest;
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

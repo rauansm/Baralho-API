@@ -1,9 +1,11 @@
 package baralho.jogador.infra;
 
+import baralho.handler.APIException;
 import baralho.jogador.application.repository.JogadorRepository;
 import baralho.jogador.domain.Jogador;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,7 +18,12 @@ public class JogadorInfraRepository implements JogadorRepository {
     @Override
     public Jogador salva(Jogador jogador) {
         log.info("[inicia] JogadorInfraRepository - salva");
-        jogadorSpringDataJPA.save(jogador);
+        try {
+            jogadorSpringDataJPA.save(jogador);
+        } catch (DataIntegrityViolationException e) {
+            throw APIException.negocio(String.format(
+                    "nome %s já está em uso, por favor escolha outro.", jogador.getNome()));
+        }
         log.info("[finaliza] JogadorInfraRepository - salva");
         return jogador;
     }

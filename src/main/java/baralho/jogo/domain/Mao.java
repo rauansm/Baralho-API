@@ -26,7 +26,7 @@ public class Mao {
     private Jogador jogador;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_mao")
+    @JoinColumn(name = "mao_id")
     private List<Carta> cartas = new ArrayList<>();
 
     public Mao(Jogador jogador, List<Carta> cartasDoJogador) {
