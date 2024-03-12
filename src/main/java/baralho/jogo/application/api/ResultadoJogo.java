@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 public class ResultadoJogo {
     private List<String> vencedores;
 
-    public ResultadoJogo(Jogo vencedores) {
-        this.vencedores = vencedores.obtemGanhadorJogo().stream()
+    public ResultadoJogo(Jogo jogo) {
+        this.vencedores = jogo.obtemGanhadorJogo().stream()
                 .map(mao -> mao.getJogador().getNome() + " com " + mao.calcularPontuacao() + " pontos")
                 .collect(Collectors.toList());
     }

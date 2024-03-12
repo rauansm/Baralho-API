@@ -22,8 +22,7 @@ public class JogadorInfraRepository implements JogadorRepository {
             jogadorSpringDataJPA.save(jogador);
         } catch (DataIntegrityViolationException e) {
             throw APIException.negocio(String.format(
-                    "nome %s já está em uso, por favor escolha outro.", jogador.getNome()));
-        }
+                    "nome %s já está em uso, por favor escolha outro.", jogador.getNome()));}
         log.info("[finaliza] JogadorInfraRepository - salva");
         return jogador;
     }
