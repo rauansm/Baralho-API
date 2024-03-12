@@ -29,6 +29,8 @@ public class Mao {
     @JoinColumn(name = "mao_id")
     private List<Carta> cartas = new ArrayList<>();
 
+
+
     public Mao(Jogador jogador, List<Carta> cartasDoJogador) {
         this.cartas = cartasDoJogador;
         this.jogador = jogador;

@@ -1,14 +1,23 @@
-version: "3.9"
+version: "3.5"
 
 services:
-  mysql:
-    image: mysql:8.0
-    hostname: mysql
-    container_name: baralho-mysql
-    restart: always
+  postgres:
+    image: postgres:latest
     ports:
-      - "3306:3306"
+      - "5432:5432"
     environment:
-      MYSQL_DATABASE: baralho
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456
+      - POSTGRES_DB=postgres
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d/
+      - ./database/data:/var/lib/postgresql/data
+    networks:
+      - app.network
+
+networks:
+    app.network:
+      driver: bridge
+
+volumes:
+    postgres.data:

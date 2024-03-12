@@ -27,6 +27,7 @@ public class Carta {
     private String naipe;
     private Integer ponto;
 
+
     public Carta(String valor, String naipe) {
         this.valor = valor;
         this.naipe = naipe;
